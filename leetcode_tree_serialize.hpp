@@ -9,6 +9,6 @@
 #ifndef leetcode_tree_serialize_hpp
 #define leetcode_tree_serialize_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* leetcode_tree_serialize_hpp */
