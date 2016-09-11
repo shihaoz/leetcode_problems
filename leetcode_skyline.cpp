@@ -56,37 +56,105 @@ public:
                 : answ;
     }
     
-    vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
+    void pushStartPoints(map<int, int, greater<int>>& cont, vector<int>& heights, int idx, vector<pair<int, int>>& answ);
+    void pushEndPoints(map<int, int, greater<int>>& cont, vector<int>& heights, int idx, vector<pair<int, int>>& answ);
+    vector<pair<int, int>> getSkyline(vector<vector<int>>& inputs) {
         vector<pair<int, int>> answ;
-        map<int, priority_queue<pair<int, int>>> start, end;  // left/right->[<height, idx>]
-        for (int i = 0; i < buildings.size(); i++) {
-            start[buildings[i][0]].push(make_pair(buildings[i][2], i));
-            end[buildings[i][1]].push(make_pair(buildings[i][2], i));
+        map<int, vector<int>> _start, _end; // <idx, [height] >
+        map<int, int, greater<int>> cont;   // <height, count >
+        // store into start points and end points
+        for (auto& vec : inputs) {
+            _start[vec[0]].push_back(vec[2]);
+            _end[vec[1]].push_back(vec[2]);
         }
-        
-        map<int, int> cont; // <height, count>
-        
-        auto it_start = start.begin(), it_end = end.begin();
-        while (it_start != start.end() and it_end != end.end()) {
+        auto it_start = _start.begin(), it_end = _end.begin();
+        while (it_start != _start.end() and it_end != _end.end()) {
             if (it_start->first < it_end->first) {
-                while (!it_start->second.empty()) {
-                    pair<int, int> now = it_start->second.top();    it_start->second.pop();
-                    
-                }
+                // push in start
+                this->pushStartPoints(cont, it_start->second, it_start->first, answ);
+                it_start++;
             }
-            if (it_end->first <= it_start->first) {
-                
+            else if (it_start->first == it_end->first){
+                // push in start
+                this->pushStartPoints(cont, it_start->second, it_start->first, answ);
+                // push in end
+                this->pushEndPoints(cont, it_end->second, it_end->first, answ);
+                it_start++; it_end++;
+            }
+            else{
+                // push in end
+                this->pushEndPoints(cont, it_end->second, it_end->first, answ);
+                it_end++;
             }
         }
+        while (it_start != _start.end()) {
+            this->pushStartPoints(cont, it_start->second, it_start->first, answ);
+            it_start++;
+        }
+        while (it_end != _end.end()) {
+            this->pushEndPoints(cont, it_end->second, it_end->first, answ);
+            it_end++;
+        }
+        
         return answ;
     }
 };
+
+
+void Solution::pushStartPoints(map<int, int, greater<int>> &cont, vector<int> &heights, int idx, vector<pair<int, int>> &answ){
+    for (int h : heights) {
+        int top_height = (cont.empty()) ? 0 : cont.begin()->first;
+        if (top_height >= h) {
+            // do nothing
+        }
+        else{
+            if (answ.empty() or
+                answ.back().first < idx) {
+                answ.push_back(make_pair(idx, h));
+            }
+            else if(answ.back().first == idx and answ.back().second < h){
+                // higher the better
+                answ.back().second = h;
+            }
+        }
+        cont[h] += 1;   // count the heights
+    }
+}
+void Solution::pushEndPoints(map<int, int, greater<int>> &cont, vector<int> &heights, int idx, vector<pair<int, int>> &answ){
+    for (int h : heights) {
+        cont[h]--;
+        if (cont[h] == 0) {
+            cont.erase(h);
+        }
+        int top_height = (cont.empty()) ? 0 : cont.begin()->first;
+        if (top_height >= h) {
+            // do nothing
+        }
+        else{
+            if (answ.empty() or
+                answ.back().first < idx) {
+                answ.push_back(make_pair(idx, top_height));
+            }
+            else if(answ.back().first == idx and answ.back().second > top_height){
+                // lower the better (since this is an end)
+                answ.back().second = top_height;
+            }
+        }
+    }
+}
+
 vector<vector<vector<int>>> _testcases = {
+    {
+        {2, 9, 10}, {3, 7, 15}, {5, 12, 12}, {15, 20, 10}, {19, 24, 8}
+    },
     {
         {1, 3, 10}, {2, 9, 10}, {3, 7, 15}, {5, 12, 12}, {15, 20, 10}, {19, 24, 8},
     },
     {
         {0, 2, 3}, {2, 5, 3}
+    },
+    {
+        {1, 2, 1}, {1, 2, 2}, {1, 2, 3},
     }
 };
 void printArray(vector<pair<int, int>> vec){
@@ -98,7 +166,7 @@ int main(){
     Solution solve;
     
     for (auto& test : _testcases) {
-        printArray(solve.getSkyline_n2(test));
+        printArray(solve.getSkyline(test));
     }
     return 0;
 }
