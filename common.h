@@ -21,6 +21,7 @@
 #include <cassert>
 #include <sstream>
 #include <stack>
+#include <numeric>
 using namespace std;
 
 #endif /* common_h */
