@@ -8,6 +8,9 @@
 
 #include "leetcode_sliding_window_max.hpp"
 
+bool cmp(int a, int b){
+    return a > b;
+}
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
@@ -23,13 +26,10 @@ public:
                 }
             }
             
-            
-            while (right >= left and _maxes[right] < nums[i]) {
-                // push this number in
-                right--;
-            }
+            auto it = upper_bound(_maxes.begin() + left, _maxes.begin() + right + 1, nums[i], cmp);
+            *it = nums[i];
             /// right is at left-- (which means empty) or _maxes[right] >= nums[i]
-            _maxes[++right] = nums[i];
+            right = it - _maxes.begin();
             if (i >= k-1) {
                 _answ.push_back(_maxes[left]);
             }
