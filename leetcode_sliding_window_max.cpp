@@ -11,23 +11,27 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        deque<int> _maxes;
-        vector<int> _answ;
+        
+        vector<int> _answ, _maxes(nums.size(), 0);  int left = 0, right = -1;
         for (int i = 0; i < nums.size(); i++) {
+            /// left = current max, right = right end index (inclusive)
             // pop if i+1 >= k
             if (i+1 > k) {
                 int to_pop = nums[i-k];
-                if (to_pop == _maxes.front()) {
-                    _maxes.pop_front();
+                if (to_pop == _maxes[left]) {
+                    left++;
                 }
             }
-            // push this number in
-            while (!_maxes.empty() and _maxes.back() < nums[i]) {
-                _maxes.pop_back();
+            
+            
+            while (right >= left and _maxes[right] < nums[i]) {
+                // push this number in
+                right--;
             }
-            _maxes.push_back(nums[i]);
+            /// right is at left-- (which means empty) or _maxes[right] >= nums[i]
+            _maxes[++right] = nums[i];
             if (i >= k-1) {
-                _answ.push_back(_maxes.front());
+                _answ.push_back(_maxes[left]);
             }
         }
         return _answ;
