@@ -29,9 +29,20 @@ namespace dzCommon {
         if (size){
             cout << "size: " << in.size() << "\n";
         }
+        cout << "[";
         for (T& i : in) {
             cout << i << " ";
-        }cout << "\n";
+        }cout << "]\n";
+    }
+    
+    template <class T>
+    void printArrayArray(vector<vector<T>> in, bool size = false) {
+        if(size){
+            cout << "size: " << in.size() << "\n";
+        }
+        for (auto& vec : in) {
+            printArray(vec);
+        }
     }
     
     const string seperator = "-------------------------\n";
