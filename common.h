@@ -23,5 +23,20 @@
 #include <stack>
 #include <numeric>
 using namespace std;
+namespace dzCommon {
+    template <class T>
+    void printArray(vector<T> in, bool size = false) {
+        if (size){
+            cout << "size: " << in.size() << "\n";
+        }
+        for (T& i : in) {
+            cout << i << " ";
+        }cout << "\n";
+    }
+    
+    const string seperator = "-------------------------\n";
+}
+
+
 
 #endif /* common_h */
