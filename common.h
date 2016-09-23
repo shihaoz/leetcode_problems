@@ -48,11 +48,30 @@ namespace dzCommon {
     const string seperator = "-------------------------\n";
 }
 
+namespace dzListNode {
+    struct ListNode{
+        int val;
+        ListNode* next;
+        ListNode(int x) : val(x), next(NULL) {}
+    };
+    ListNode* buildList(vector<int>& vec){
+        if (vec.empty()) {
+            return nullptr;
+        }
+        ListNode* head = new ListNode(vec[0]), *last = head;
+        for (int i = 1 ; i < vec.size(); i++) {
+            last->next = new ListNode(vec[i]);
+            last = last->next;
+        }
+        return head;
+    }
+    void printList(ListNode* head){
+        while(head){
+            cout << head->val << " ";
+            head = head->next;
+        }cout << "\n";
+    }
+}
 
-struct ListNode{
-    int val;
-    ListNode* next;
-    ListNode(int x) : val(x), next(NULL) {}
-};
 
 #endif /* common_h */
