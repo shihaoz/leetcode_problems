@@ -47,7 +47,18 @@ namespace dzCommon {
     
     const string seperator = "-------------------------\n";
 }
-
+namespace dzInterval{
+    struct Interval{
+        int start, end;
+        Interval(): start(0), end(0){};
+        Interval(int s, int e): start(s), end(e){};
+    };
+    void printIntervalArray(vector<Interval> inputs){
+        for (Interval i : inputs){
+            cout << "(" << i.start << ", " << i.end << ") ";
+        }cout << "\n";
+    }
+}
 namespace dzListNode {
     struct ListNode{
         int val;

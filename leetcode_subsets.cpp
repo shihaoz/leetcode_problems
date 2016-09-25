@@ -2,7 +2,7 @@
 //  leetcode_subsets.cpp
 //  leetcode2016
 //
-//  Created by Shihao Zhang on 9/18/16.
+//  Created by Shihao Zhang on 9/24/16.
 //  Copyright © 2016 David Zhang. All rights reserved.
 //
 
@@ -14,18 +14,16 @@ public:
         if (nums.empty()) {
             return {};
         }
+        vector<vector<int>> _answ(1, {});
         
-        // setup
-        vector<vector<int>> _answ;
-        _answ.push_back({});
-        for (int i = 0; i < nums.size(); i++) {
+        for (int next_num : nums) {
             int size = _answ.size();
-            for (int j = 0; j < size; j++) {
-                // use i
-                _answ.push_back({_answ[j]});
-                _answ.back().push_back(nums[i]);
+            for (int i = 0; i < size; i++) {
+                _answ.push_back(_answ[i]);
+                _answ.back().push_back(next_num);
             }
         }
+        
         return _answ;
     }
 };
@@ -35,16 +33,12 @@ const vector<vector<int>> _testcases = {
         1,2,3,
     },
     {
-        1,
-    },
-    {
-        1,1,1,
+        4,1,5,
     }
 };
 
 int main(){
     Solution solve;
-    
     for (auto test : _testcases) {
         dzCommon::printArrayArray(solve.subsets(test), true);
     }

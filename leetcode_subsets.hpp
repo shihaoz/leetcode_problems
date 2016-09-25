@@ -2,7 +2,7 @@
 //  leetcode_subsets.hpp
 //  leetcode2016
 //
-//  Created by Shihao Zhang on 9/18/16.
+//  Created by Shihao Zhang on 9/24/16.
 //  Copyright © 2016 David Zhang. All rights reserved.
 //
 
