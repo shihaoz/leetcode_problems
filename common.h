@@ -22,6 +22,7 @@
 #include <sstream>
 #include <stack>
 #include <numeric>
+#include <cassert>
 using namespace std;
 namespace dzCommon {
     template <class T>
@@ -45,7 +46,10 @@ namespace dzCommon {
         }
     }
     
-    const string seperator = "-------------------------\n";
+    const int _num_separator = 32;
+    void printSeparator(char sep = '*'){
+        cout << string(_num_separator, sep) << '\n';
+    }
 }
 namespace dzInterval{
     struct Interval{
