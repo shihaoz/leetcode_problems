@@ -12,24 +12,24 @@ class Solution {
 
 public:
     bool validTree(int n, vector<pair<int, int>>& edges) {
-        vector<vector<bool>> adjMatrix(n, vector<bool>(n, false));
+        vector<unordered_set<int>> adjList(n);
         for (auto p : edges) {
-            adjMatrix[p.first][p.second] = adjMatrix[p.second][p.first] = true;
+            adjList[p.first].insert(p.second);
+            adjList[p.second].insert(p.first);
         }
         unordered_set<int> visited;
         queue<int> _storage;
         _storage.push(0);   visited.insert(0);
         while (!_storage.empty()) {
             int now = _storage.front(); _storage.pop();
-            for (int i = 0; i < adjMatrix[now].size(); i++) {
-                if (adjMatrix[now][i]) {    // reachable
-                    if (visited.find(i) != visited.end()) {
-                        return false;   // cycle detected
-                    }
-                    visited.insert(i);  _storage.push(i);
-                    adjMatrix[now][i] = adjMatrix[i][now] = false;
+            for (auto it = adjList[now].begin(); it != adjList[now].end(); it++) {// reachable
+                if (visited.find(*it) != visited.end()) {
+                    return false;   // cycle detected
                 }
+                visited.insert(*it);    _storage.push(*it);
+                adjList[*it].erase(now);
             }
+            adjList[now].clear();
         }
         
         return visited.size() == n;
