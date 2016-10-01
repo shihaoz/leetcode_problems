@@ -9,6 +9,6 @@
 #ifndef coursera1_hpp
 #define coursera1_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* coursera1_hpp */

@@ -9,6 +9,6 @@
 #ifndef wayne_fidelssa_hpp
 #define wayne_fidelssa_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* wayne_fidelssa_hpp */

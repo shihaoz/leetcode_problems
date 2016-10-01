@@ -9,6 +9,6 @@
 #ifndef leetcode_spiral_matrix2_hpp
 #define leetcode_spiral_matrix2_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* leetcode_spiral_matrix2_hpp */

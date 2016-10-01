@@ -9,6 +9,6 @@
 #ifndef ms_spiral_matrix_hpp
 #define ms_spiral_matrix_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_spiral_matrix_hpp */

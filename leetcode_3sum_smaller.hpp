@@ -9,6 +9,6 @@
 #ifndef leetcode_3sum_smaller_hpp
 #define leetcode_3sum_smaller_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* leetcode_3sum_smaller_hpp */

@@ -9,6 +9,6 @@
 #ifndef ms_reverse_word_hpp
 #define ms_reverse_word_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_reverse_word_hpp */

@@ -9,6 +9,6 @@
 #ifndef murat1_hpp
 #define murat1_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* murat1_hpp */

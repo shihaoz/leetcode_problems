@@ -9,6 +9,6 @@
 #ifndef leetcode_walls_and_gates_hpp
 #define leetcode_walls_and_gates_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* leetcode_walls_and_gates_hpp */

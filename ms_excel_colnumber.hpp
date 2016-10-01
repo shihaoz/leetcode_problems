@@ -9,6 +9,6 @@
 #ifndef ms_excel_colnumber_hpp
 #define ms_excel_colnumber_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_excel_colnumber_hpp */

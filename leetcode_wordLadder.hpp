@@ -9,6 +9,6 @@
 #ifndef leetcode_wordLadder_hpp
 #define leetcode_wordLadder_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* leetcode_wordLadder_hpp */

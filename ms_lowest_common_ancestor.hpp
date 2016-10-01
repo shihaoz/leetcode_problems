@@ -9,6 +9,6 @@
 #ifndef ms_lowest_common_ancestor_hpp
 #define ms_lowest_common_ancestor_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_lowest_common_ancestor_hpp */

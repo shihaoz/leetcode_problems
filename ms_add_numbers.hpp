@@ -9,6 +9,6 @@
 #ifndef ms_add_numbers_hpp
 #define ms_add_numbers_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_add_numbers_hpp */

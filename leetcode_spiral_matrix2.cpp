@@ -7,3 +7,10 @@
 //
 
 #include "leetcode_spiral_matrix2.hpp"
+
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        
+    }
+};

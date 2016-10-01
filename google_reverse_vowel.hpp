@@ -9,6 +9,6 @@
 #ifndef google_reverse_vowel_hpp
 #define google_reverse_vowel_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* google_reverse_vowel_hpp */

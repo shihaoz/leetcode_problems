@@ -9,6 +9,6 @@
 #ifndef ms_3sum_closest_hpp
 #define ms_3sum_closest_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_3sum_closest_hpp */

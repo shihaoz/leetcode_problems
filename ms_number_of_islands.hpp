@@ -9,6 +9,6 @@
 #ifndef ms_number_of_islands_hpp
 #define ms_number_of_islands_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_number_of_islands_hpp */

@@ -9,6 +9,6 @@
 #ifndef ms_validate_bst_hpp
 #define ms_validate_bst_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_validate_bst_hpp */

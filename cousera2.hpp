@@ -9,6 +9,6 @@
 #ifndef cousera2_hpp
 #define cousera2_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* cousera2_hpp */

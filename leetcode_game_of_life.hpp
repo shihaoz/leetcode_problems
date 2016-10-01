@@ -9,6 +9,6 @@
 #ifndef leetcode_game_of_life_hpp
 #define leetcode_game_of_life_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* leetcode_game_of_life_hpp */

@@ -9,6 +9,6 @@
 #ifndef leetcode_number_connected_components_hpp
 #define leetcode_number_connected_components_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* leetcode_number_connected_components_hpp */

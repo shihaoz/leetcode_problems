@@ -9,6 +9,6 @@
 #ifndef ms_random_list_node_hpp
 #define ms_random_list_node_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_random_list_node_hpp */

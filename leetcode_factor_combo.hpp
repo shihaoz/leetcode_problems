@@ -9,6 +9,6 @@
 #ifndef leetcode_factor_combo_hpp
 #define leetcode_factor_combo_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* leetcode_factor_combo_hpp */

@@ -9,6 +9,6 @@
 #ifndef google2_hpp
 #define google2_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* google2_hpp */

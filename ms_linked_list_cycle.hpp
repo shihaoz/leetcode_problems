@@ -9,6 +9,6 @@
 #ifndef ms_linked_list_cycle_hpp
 #define ms_linked_list_cycle_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_linked_list_cycle_hpp */

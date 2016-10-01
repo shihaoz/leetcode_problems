@@ -9,6 +9,6 @@
 #ifndef leetcode_upside_down_tree_hpp
 #define leetcode_upside_down_tree_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* leetcode_upside_down_tree_hpp */

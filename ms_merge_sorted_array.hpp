@@ -9,6 +9,6 @@
 #ifndef ms_merge_sorted_array_hpp
 #define ms_merge_sorted_array_hpp
 
-#include <stdio.h>
+#include "common.h"
 
 #endif /* ms_merge_sorted_array_hpp */

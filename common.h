@@ -24,6 +24,7 @@
 #include <numeric>
 #include <cassert>
 using namespace std;
+
 namespace dzCommon {
     template <class T>
     void printArray(vector<T> in, bool size = false) {
@@ -51,6 +52,26 @@ namespace dzCommon {
         cout << string(_num_separator, sep) << '\n';
     }
 }
+
+namespace dzTree{
+    struct TreeNode {
+        int val;
+        TreeNode *left;
+        TreeNode *right;
+        TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    };
+    
+    void clearMemory(TreeNode* root){
+        if (root->left) {
+            clearMemory(root->left);
+        }
+        if (root->right){
+            clearMemory(root->right);
+        }
+        delete root;    root = nullptr;
+    }
+}
+
 namespace dzInterval{
     struct Interval{
         int start, end;
@@ -85,6 +106,14 @@ namespace dzListNode {
             cout << head->val << " ";
             head = head->next;
         }cout << "\n";
+    }
+    void clearList(ListNode* head){
+        ListNode* next;
+        while(head){
+            next = head->next;
+            delete head;
+            head = head->next;
+        }
     }
 }
 
