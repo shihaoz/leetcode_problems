@@ -10,42 +10,39 @@
 
 
 class Solution {
-    void _helper(int x, vector<vector<int> > &adjMatrix);
+    void _helper(int x, vector<list<int>>& adjList, vector<bool>& visited);
 public:
     int countComponents(int n, vector<pair<int, int>>& edges) {
         int count = 0;
-        vector<vector<int>> adjMatrix(n, vector<int>(n, 0));
-        for (auto p : edges) {
-            adjMatrix[p.first][p.second] = adjMatrix[p.second][p.first] = 1;
+
+        vector<list<int>> adjList(n);
+        for (int i = 0; i < edges.size(); i++) {    // construct adj list
+            adjList[edges[i].first].push_back(edges[i].second);
+            adjList[edges[i].second].push_back(edges[i].first);
         }
-        for (int i = 0; i < n; i++) {   // self-link
-            adjMatrix[i][i] = 1;
-        }
-        
-        for (int i = 0; i < adjMatrix.size(); i++) {
-            for (int j = 0; j < adjMatrix[i].size(); j++) {
-                if (adjMatrix[i][j]) {
-                    this->_helper(i, adjMatrix);
-                    count++;
-                }
+        vector<bool> visited(n, false);
+        for (int i = 0; i < n; i++) {
+            if (visited[i] == false) {// unvisited node
+                this->_helper(i, adjList, visited);
+                count++;
             }
         }
         return count;
     }
 };
 
-void Solution::_helper(int x, vector<vector<int> > &adjMatrix){
-    
+void Solution::_helper(int x, vector<list<int>>& adjList, vector<bool>& visited){
+    visited[x] = true;
     queue<int> _storage;    _storage.push(x);
-    int now;
-    while (!_storage.empty()) {// not empty, get all connect node
-        now = _storage.front(); _storage.pop();
-        adjMatrix[now][now] = 0;
-        for (int i = 0; i < adjMatrix[now].size(); i++) {
-            if (adjMatrix[now][i]) {    // if connected and unvisited
-                /// push to storage, and mark visited
-                _storage.push(i);
-                adjMatrix[now][i] = adjMatrix[i][now] = 0;
+    while (!_storage.empty()) {
+        int now = _storage.front(), node;
+        _storage.pop();
+        
+        while (!adjList[now].empty()) {
+            node = adjList[now].front();    adjList[now].pop_front();
+            if (!visited[node]) {
+                _storage.push(node);
+                visited[node] = true;
             }
         }
     }
@@ -71,7 +68,7 @@ const vector<TEST> _testcases = {
     {
         5,
         {{0,1},{2,3}},
-    }
+    },
 };
 int main(){
     Solution solve;
