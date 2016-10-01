@@ -10,7 +10,7 @@
 
 
 class Solution {
-    void _helper(unordered_set<int>& unvisited, vector<vector<int>>& adjMatrix);
+    void _helper(int x, vector<vector<int> > &adjMatrix);
 public:
     int countComponents(int n, vector<pair<int, int>>& edges) {
         int count = 0;
@@ -18,29 +18,34 @@ public:
         for (auto p : edges) {
             adjMatrix[p.first][p.second] = adjMatrix[p.second][p.first] = 1;
         }
-        vector<int> holder(n, 0);   iota(holder.begin(), holder.end(), 0);
-        unordered_set<int> unvisited(holder.begin(), holder.end());
+        for (int i = 0; i < n; i++) {   // self-link
+            adjMatrix[i][i] = 1;
+        }
         
-        while (!unvisited.empty()) {
-            this->_helper(unvisited, adjMatrix);
-            count++;
+        for (int i = 0; i < adjMatrix.size(); i++) {
+            for (int j = 0; j < adjMatrix[i].size(); j++) {
+                if (adjMatrix[i][j]) {
+                    this->_helper(i, adjMatrix);
+                    count++;
+                }
+            }
         }
         return count;
     }
 };
 
-void Solution::_helper(unordered_set<int>& unvisited, vector<vector<int> > &adjMatrix){
-    int now = *unvisited.begin();   unvisited.erase(now);
-    queue<int> _storage;    _storage.push(now);
-
+void Solution::_helper(int x, vector<vector<int> > &adjMatrix){
+    
+    queue<int> _storage;    _storage.push(x);
+    int now;
     while (!_storage.empty()) {// not empty, get all connect node
         now = _storage.front(); _storage.pop();
-        
+        adjMatrix[now][now] = 0;
         for (int i = 0; i < adjMatrix[now].size(); i++) {
-            if (adjMatrix[now][i] and unvisited.find(i) != unvisited.end()) {    // if connected and unvisited
+            if (adjMatrix[now][i]) {    // if connected and unvisited
                 /// push to storage, and mark visited
                 _storage.push(i);
-                unvisited.erase(i);
+                adjMatrix[now][i] = adjMatrix[i][now] = 0;
             }
         }
     }
