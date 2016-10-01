@@ -10,43 +10,31 @@
 
 
 class Solution {
-    void _helper(int x, vector<list<int>>& adjList, vector<bool>& visited);
+
 public:
     int countComponents(int n, vector<pair<int, int>>& edges) {
-        int count = 0;
+        int count = n;
 
-        vector<list<int>> adjList(n);
-        for (int i = 0; i < edges.size(); i++) {    // construct adj list
-            adjList[edges[i].first].push_back(edges[i].second);
-            adjList[edges[i].second].push_back(edges[i].first);
-        }
-        vector<bool> visited(n, false);
-        for (int i = 0; i < n; i++) {
-            if (visited[i] == false) {// unvisited node
-                this->_helper(i, adjList, visited);
-                count++;
+        /// union find
+        vector<int> heads(n), weights(n, 1);
+        iota(heads.begin(), heads.end(), 0);
+        
+        for (int i = 0; i < edges.size(); i++) {
+            int smaller = edges[i].first, larger = edges[i].second;
+            while (heads[smaller] != smaller) {smaller = heads[smaller];}   // find head of left
+            while (heads[larger] != larger) {larger = heads[larger];}   // find head of right
+            if (smaller != larger) {    // same head
+                if (weights[larger] < weights[smaller]) {swap(larger, smaller);}
+                heads[smaller] = larger;
+                weights[larger] += weights[smaller];
+                count--;
             }
         }
+        
         return count;
     }
 };
 
-void Solution::_helper(int x, vector<list<int>>& adjList, vector<bool>& visited){
-    visited[x] = true;
-    queue<int> _storage;    _storage.push(x);
-    while (!_storage.empty()) {
-        int now = _storage.front(), node;
-        _storage.pop();
-        
-        while (!adjList[now].empty()) {
-            node = adjList[now].front();    adjList[now].pop_front();
-            if (!visited[node]) {
-                _storage.push(node);
-                visited[node] = true;
-            }
-        }
-    }
-}
 struct TEST {
     int n;
     vector<pair<int, int>> edges;
@@ -62,12 +50,16 @@ const vector<TEST> _testcases = {
         {{0,1},{1,2},{2,3},{3,4}},
     },
     {
-        2000,
+        5,
         {},
     },
     {
         5,
         {{0,1},{2,3}},
+    },
+    {
+        5,
+        {{0,1},{1,2},{0,2},{3,4}},
     },
 };
 int main(){
