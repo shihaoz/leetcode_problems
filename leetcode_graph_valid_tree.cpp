@@ -12,28 +12,22 @@ class Solution {
 
 public:
     bool validTree(int n, vector<pair<int, int>>& edges) {
-        vector<unordered_set<int>> adjList(n);
-        for (auto p : edges) {
-            adjList[p.first].insert(p.second);
-            adjList[p.second].insert(p.first);
-        }
-        unordered_set<int> visited;
-        queue<int> _storage;
-        _storage.push(0);   visited.insert(0);
-        while (!_storage.empty()) {
-            int now = _storage.front(); _storage.pop();
-            for (auto it = adjList[now].begin(); it != adjList[now].end(); it++) {// reachable
-                if (visited.find(*it) != visited.end()) {
-                    return false;   // cycle detected
-                }
-                visited.insert(*it);    _storage.push(*it);
-                adjList[*it].erase(now);
+        vector<int> heads(n);   iota(heads.begin(), heads.end(), 0);
+        int count = n;
+        for (auto edge : edges) {
+            int head1, head2;   tie(head1, head2) = edge;
+            while (heads[head1] != head1) {head1 = heads[head1];}
+            while (heads[head2] != head2) {head2 = heads[head2];}
+            if (head1 == head2) {
+                return false;
             }
-            adjList[now].clear();
+            int smaller = min(head1, head2), larger = max(head1, head2);
+            heads[larger] = smaller;
+            count--;
         }
-        
-        return visited.size() == n;
+        return count == 1;
     }
+
 };
 
 struct TEST {

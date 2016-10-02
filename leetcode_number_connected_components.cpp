@@ -16,17 +16,15 @@ public:
         int count = n;
 
         /// union find
-        vector<int> heads(n), weights(n, 1);
-        iota(heads.begin(), heads.end(), 0);
+        vector<int> heads(n);   iota(heads.begin(), heads.end(), 0);
         
         for (int i = 0; i < edges.size(); i++) {
             int smaller = edges[i].first, larger = edges[i].second;
             while (heads[smaller] != smaller) {smaller = heads[smaller];}   // find head of left
             while (heads[larger] != larger) {larger = heads[larger];}   // find head of right
             if (smaller != larger) {    // same head
-                if (weights[larger] < weights[smaller]) {swap(larger, smaller);}
-                heads[smaller] = larger;
-                weights[larger] += weights[smaller];
+                if (smaller > larger) {swap(smaller, larger);}
+                heads[larger] = heads[smaller];
                 count--;
             }
         }
