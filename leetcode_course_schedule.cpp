@@ -33,6 +33,32 @@ public:
         }
         return true;
     }
+    bool canFinishTopoSort(int numCourses, vector<pair<int, int>>& prerequisites){
+        vector<int> answ;   answ.reserve(numCourses);
+        vector<int> inDegree(numCourses, 0);
+        vector<list<int>> adjList(numCourses);
+        for (auto p : prerequisites) {
+            adjList[p.second].push_back(p.first);
+            inDegree[p.first]++;
+        }
+        queue<int> _next;
+        for (int i = 0; i < inDegree.size(); i++) {// store all in-Degree == 0
+            if (inDegree[i] == 0) {
+                _next.push(i);
+            }
+        }
+        while (!_next.empty()) {
+            int now = _next.front();    _next.pop();
+            answ.push_back(now);
+            for (auto it = adjList[now].begin(); it != adjList[now].end(); it++) {
+                inDegree[*it]--;
+                if (inDegree[*it] == 0) {// store in-Degree == 0
+                    _next.push(*it);
+                }
+            }
+        }
+        return answ.size() == numCourses;
+    }
 };
 
 bool Solution::DFS(unordered_set<int> &visited, vector<list<int> > &edges, int node){
@@ -83,7 +109,7 @@ int main(){
     Solution solve; cout << boolalpha;
     
     for (auto test : _testcases) {
-        cout << solve.canFinish(test.numCourses, test.prerequisites) << "\n";
+        cout << solve.canFinishTopoSort(test.numCourses, test.prerequisites) << "\n";
     }
     return 0;
 }

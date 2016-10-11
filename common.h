@@ -23,6 +23,7 @@
 #include <stack>
 #include <numeric>
 #include <cassert>
+#include <functional>
 using namespace std;
 
 namespace dzCommon {
@@ -36,7 +37,7 @@ namespace dzCommon {
             cout << i << " ";
         }cout << "]\n";
     }
-    
+
     template <class T>
     void printArrayArray(vector<vector<T>> in, bool size = false) {
         if(size){
@@ -59,6 +60,7 @@ namespace dzTree{
         TreeNode *left;
         TreeNode *right;
         TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+        TreeNode() : TreeNode(-1){}
     };
     
     void clearMemory(TreeNode* root){
